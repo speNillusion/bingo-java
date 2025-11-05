@@ -5,37 +5,61 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+
 /**
- * Responsável por sortear os números do Bingo de 0 a 99 sem repetição.
+ * Sorteia números de 1 a 75, associando cada um à sua letra (B, I, N, G, O).
  */
 public class Sorteador {
     private final List<Integer> numerosParaSortear;
-    private final List<Integer> numerosJaSorteados;
+    private final List<String> pedrasSorteadas;
 
     public Sorteador() {
         this.numerosParaSortear = new ArrayList<>();
-        for (int i = 0; i <= 99; i++) {
+        for (int i = 1; i <= 1000; i++) {
             numerosParaSortear.add(i);
         }
-        // Embaralha a lista para garantir uma ordem de sorteio aleatória
         Collections.shuffle(numerosParaSortear, new Random());
-        this.numerosJaSorteados = new ArrayList<>();
+        this.pedrasSorteadas = new ArrayList<>();
     }
 
     /**
-     * Sorteia o próximo número da lista.
-     * @return O número sorteado, ou -1 se não houver mais números.
+     * Sorteia o próximo número e retorna a "pedra" (letra + número).
+     * @return Um array de String contendo [letra, número], ou null se acabar.
      */
-    public int sortearProximo() {
+    public String[] sortearProximo() {
         if (numerosParaSortear.isEmpty()) {
-            return -1; // Indica que todos os números já foram sorteados
+            return null; // Fim do sorteio
         }
-        int numeroSorteado = numerosParaSortear.remove(0);
-        numerosJaSorteados.add(numeroSorteado);
-        return numeroSorteado;
+        int numero = numerosParaSortear.remove(0);
+        char letra = getLetraDoNumero(numero);
+
+        String pedra = letra + "-" + String.format("%02d", numero);
+        pedrasSorteadas.add(pedra);
+
+        return new String[]{String.valueOf(letra), String.valueOf(numero)};
     }
 
-    public List<Integer> getNumerosJaSorteados() {
-        return numerosJaSorteados;
+    public static char getLetraDoNumero(int numero) {
+        if (numero >= 1 && numero <= 15) return 'B';
+        if (numero >= 16 && numero <= 30) return 'I';
+        if (numero >= 31 && numero <= 45) return 'N';
+        if (numero >= 46 && numero <= 60) return 'G';
+        return 'O'; // 61 a 75
+    }
+
+    public static int getColunaDaLetra(char letra) {
+        switch (letra) {
+            case 'B': return 0;
+            case 'I': return 1;
+            case 'N': return 2;
+            case 'G': return 3;
+            case 'O': return 4;
+            default: return -1;
+        }
+    }
+
+    public List<String> getPedrasSorteadas() {
+        return pedrasSorteadas;
     }
 }
+
