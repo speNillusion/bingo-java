@@ -112,11 +112,7 @@ public class Cartela {
         }
 
 
-        if (diagonalSecundaria && diagonalPrincipal && linhaCompleta && colunaCompleta) {
-            return true;
-        } else {
-            return false;
-        }
+        return diagonalSecundaria && diagonalPrincipal && linhaCompleta && colunaCompleta;
     }
 
 

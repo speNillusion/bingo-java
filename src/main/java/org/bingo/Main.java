@@ -67,7 +67,7 @@ public class Main {
             System.out.println("Tivemos " + cartelasVencedoras.size() + " cartela(s) vencedora(s)!");
             for (Cartela vencedora : cartelasVencedoras) {
                 System.out.println("\n--- Cartela Vencedora ---");
-                System.out.println(vencedora); // O toString() agora mostra a cartela marcada
+                System.out.println(vencedora);
             }
             System.out.println("\nTotal de pedras sorteadas: " + sorteador.getPedrasSorteadas().size());
             System.out.println("Pedras sorteadas: " + sorteador.getPedrasSorteadas());

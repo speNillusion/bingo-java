@@ -3,7 +3,6 @@ package org.bingo.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 
 /**
@@ -15,11 +14,30 @@ public class Sorteador {
 
     public Sorteador() {
         this.numerosParaSortear = new ArrayList<>();
-        for (int i = 1; i <= 1000; i++) {
+        for (int i = 1; i <= 75; i++) {
             numerosParaSortear.add(i);
         }
-        Collections.shuffle(numerosParaSortear, new Random());
+        Collections.shuffle(numerosParaSortear);
         this.pedrasSorteadas = new ArrayList<>();
+    }
+
+    public static int getColunaDaLetra(char letra) {
+        return switch (letra) {
+            case 'B' -> 0;
+            case 'I' -> 1;
+            case 'N' -> 2;
+            case 'G' -> 3;
+            case 'O' -> 4;
+            default -> -1;
+        };
+    }
+
+    public static char getLetraDoNumero(int numero) {
+        if (numero >= 1 && numero <= 15) return 'B';
+        if (numero >= 16 && numero <= 30) return 'I';
+        if (numero >= 31 && numero <= 45) return 'N';
+        if (numero >= 46 && numero <= 60) return 'G';
+        return 'O'; // 61 a 75
     }
 
     /**
@@ -37,25 +55,6 @@ public class Sorteador {
         pedrasSorteadas.add(pedra);
 
         return new String[]{String.valueOf(letra), String.valueOf(numero)};
-    }
-
-    public static char getLetraDoNumero(int numero) {
-        if (numero >= 1 && numero <= 15) return 'B';
-        if (numero >= 16 && numero <= 30) return 'I';
-        if (numero >= 31 && numero <= 45) return 'N';
-        if (numero >= 46 && numero <= 60) return 'G';
-        return 'O'; // 61 a 75
-    }
-
-    public static int getColunaDaLetra(char letra) {
-        switch (letra) {
-            case 'B': return 0;
-            case 'I': return 1;
-            case 'N': return 2;
-            case 'G': return 3;
-            case 'O': return 4;
-            default: return -1;
-        }
     }
 
     public List<String> getPedrasSorteadas() {
